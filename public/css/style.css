@@ -1,0 +1,262 @@
+.ml-30{
+    margin-left: 300px;
+}
+
+.intro{
+    height: 500px;
+    background: url("/images/bg2.jpg") center /cover no-repeat;
+    position: relative;
+}
+
+
+.bg_intro{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color:rgba(0,0,0,.4);
+    z-index: 0;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    align-items: center;
+}
+
+.header__logo{
+    height: 30px;
+    margin-right: 10px;
+}
+
+.header__logo__text{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #ffffff;
+    z-index: 3;
+}
+
+.header__logo__text:hover{
+    color: #ffffff;
+}
+
+.account{
+    display: flex;
+    align-items: center;
+}
+
+.header__account__img{
+    height: 20px;
+    margin-right: 10px;
+}
+
+.account{
+    height: 20px;
+}
+
+.account__text{
+    margin: 0 !important;
+}
+
+.intro__title{
+    display: flex;
+    justify-content: center;
+    color: #ffffff;
+    z-index: 3;
+    text-shadow: 6.67px 6.67px 13px rgba(0, 0, 0, 0.7);
+}
+
+.intro__title__h2{
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+    color: #ffffff;
+    z-index: 3;
+    text-shadow: 6.67px 6.67px 13px rgba(0, 0, 0, 0.7);
+}
+
+
+.intro__form{
+    margin-top: 30px;
+    justify-content: center;
+    display: flex;
+    z-index: 3;
+}
+
+.intro__input{
+    margin-right: 10px;
+}
+
+.intro__btn{
+    margin-left: 10px;
+}
+.routes{
+    margin-bottom: 70px;
+}
+
+.routes__inner{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.card{
+    margin-bottom: 20px;
+}
+
+.footer{
+    background: #539aca;
+    color: #fff;
+    padding: 35px;
+}
+
+.footer__inner{
+    display: flex;
+    justify-content: space-around;
+}
+
+.footer__block{
+    width: 250px;
+}
+
+.footer__a{
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.head{
+    background: #539aca;
+}
+
+.login{
+    display: flex;
+}
+
+.login__title{
+    text-align: center;
+}
+
+.login__form{
+    width: 500px;
+}
+
+.login__inner{
+    display: flex;
+    justify-content: center;
+}
+
+.form__box{
+    background: #aedbfb;
+    padding: 20px;
+}
+
+.content{
+    min-height: 500px;
+}
+
+.all__routes__inner{
+    display: flex;
+    flex-direction: column;
+}
+
+.card__table__td{
+    padding: 3px 40px 3px 0px;
+}
+
+.select_place{
+    display: flex;
+    position: relative;
+
+}
+
+.select_place_bus{
+    width: 100px;
+    height: 200px;
+
+    border: 2px solid black;
+
+    position: absolute;
+
+}
+
+.btn-place{
+    width: 100%;
+}
+
+.account_text{
+    font-weight: bold;
+}
+
+.button_null {
+    padding: 0;
+    border: none;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    /* отображаем курсор в виде руки при наведении; некоторые
+    считают, что необходимо оставлять стрелочный вид для кнопок */
+    cursor: pointer;
+}
+
+.modal {
+    display: none; /* Скрыто по умолчанию */
+    position: fixed; /* Оставаться на месте */
+    z-index: 1; /* Сидеть на вершине */
+    left: 0;
+    top: 0;
+    width: 100%; /* Полная ширина */
+    height: 100%; /* Полная высота */
+    overflow: auto; /* Включите прокрутку, если это необходимо */
+    background-color: rgb(0,0,0); /* Цвет запасной вариант */
+    background-color: rgba(0,0,0,0.4); /* Черный с непрозрачностью */
+}
+
+/* Модальное содержание/коробка */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% сверху и по центру */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400px; /* Может быть больше или меньше, в зависимости от размера экрана */
+}
+
+/* Кнопка закрытия */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.auth{
+    padding: 40px 30px;
+    background: #aedbfb;
+    width: 600px;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+
+    margin: auto;
+}
+
+.hide{
+    display: none;
+}
+
+.admin_inner{
+    display: flex;
+    flex-wrap: nowrap;
+    height: 100vh;
+    height: -webkit-fill-available;
+    max-height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
