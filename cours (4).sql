@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Фев 14 2023 г., 14:38
+-- Время создания: Мар 17 2023 г., 13:54
 -- Версия сервера: 10.3.13-MariaDB-log
 -- Версия PHP: 7.3.9
 
@@ -185,7 +185,28 @@ INSERT INTO `stations` (`id`, `name`, `param`, `route_id`) VALUES
 (5, 'Подтыбок', 5, 9),
 (6, 'Озъяг', 6, 9),
 (7, 'Ульяново', 7, 9),
-(8, 'Кебанъель', 8, 9);
+(8, 'Кебанъель', 8, 9),
+(9, 'Сторожевск', 1, 1),
+(10, 'Усть-Кулом', 2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `tests`
+--
+
+CREATE TABLE `tests` (
+  `id` int(11) NOT NULL,
+  `date` time DEFAULT '00:00:00',
+  `datetime` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Дамп данных таблицы `tests`
+--
+
+INSERT INTO `tests` (`id`, `date`, `datetime`) VALUES
+(1, '01:00:00', '2023-03-02 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -205,6 +226,8 @@ CREATE TABLE `tickets` (
   `tariff` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `trip_id` int(11) NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
+  `way_id` int(11) NOT NULL,
+  `create_time` datetime NOT NULL DEFAULT current_timestamp(),
   `created_at` date DEFAULT NULL,
   `updated_at` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -213,10 +236,10 @@ CREATE TABLE `tickets` (
 -- Дамп данных таблицы `tickets`
 --
 
-INSERT INTO `tickets` (`id`, `name`, `surname`, `patronymic`, `sex`, `document_type`, `document_number`, `place`, `tariff`, `trip_id`, `user_id`, `created_at`, `updated_at`) VALUES
-(38, 'Вася', 'Осипов', 'Иванович', 'Мужской', 'Паспорт РФ', '6789367895', '5', 'Полный', 31, 7, '2023-02-10', '2023-02-10'),
-(39, 'Николай', 'Иванов', 'Сергеевич', 'Мужской', 'Паспорт РФ', '7563867583', '18', 'Полный', 28, 7, '2023-02-10', '2023-02-10'),
-(40, 'Александр', 'Петров', 'Юрьевич', 'Мужской', 'Паспорт РФ', '7563867583', '2', 'Полный', 28, 7, '2023-02-10', '2023-02-10');
+INSERT INTO `tickets` (`id`, `name`, `surname`, `patronymic`, `sex`, `document_type`, `document_number`, `place`, `tariff`, `trip_id`, `user_id`, `way_id`, `create_time`, `created_at`, `updated_at`) VALUES
+(52, 'Иван', 'Осипов', 'Юрьевич', 'Мужской', 'Паспорт РФ', '9376582382', '18', 'Полный', 32, 7, 6, '2023-03-02 14:24:38', '2023-03-02', '2023-03-02'),
+(53, 'Михаил', 'Петров', 'Сергеевич', 'Мужской', 'Паспорт РФ', '8756493756', '10', 'Полный', 32, 7, 6, '2023-03-02 14:25:48', '2023-03-02', '2023-03-02'),
+(54, 'Богдан', 'Одинцов', 'Александрович', 'Мужской', 'Паспорт РФ', '7563867583', '1', 'Полный', 32, 7, 10, '2023-03-02 14:26:19', '2023-03-02', '2023-03-02');
 
 -- --------------------------------------------------------
 
@@ -241,10 +264,8 @@ CREATE TABLE `trips` (
 
 INSERT INTO `trips` (`id`, `date_from`, `date_to`, `bus_id`, `route_id`, `driver_id`, `created_at`, `updated_at`) VALUES
 (28, '2023-02-12 10:10:00', '2023-02-12 12:45:00', 2, 9, 1, '2023-02-10', '2023-02-10'),
-(29, '2023-02-11 12:52:00', '2023-02-12 12:52:00', 2, 3, 1, '2023-02-10', '2023-02-10'),
-(30, '2023-02-11 12:58:00', '2023-02-12 12:58:00', 1, 6, 1, '2023-02-10', '2023-02-10'),
-(31, '2023-02-19 12:58:00', '2023-02-26 12:58:00', 1, 2, 1, '2023-02-10', '2023-02-10'),
-(32, '2023-02-15 12:13:00', '2023-02-18 12:13:00', 2, 1, 1, '2023-02-14', '2023-02-14');
+(32, '2023-02-15 12:10:00', '2023-02-18 18:45:00', 2, 1, 1, '2023-02-14', '2023-02-14'),
+(33, '2023-02-25 00:00:00', '2023-02-25 02:00:00', 1, 9, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -282,8 +303,8 @@ CREATE TABLE `ways` (
   `id` int(11) NOT NULL,
   `fromm` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date_from` timestamp NULL DEFAULT NULL,
-  `date_to` timestamp NULL DEFAULT NULL,
+  `time_from` time DEFAULT '00:00:00',
+  `time_to` time DEFAULT NULL,
   `route_id` int(11) NOT NULL,
   `price` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
@@ -294,13 +315,18 @@ CREATE TABLE `ways` (
 -- Дамп данных таблицы `ways`
 --
 
-INSERT INTO `ways` (`id`, `fromm`, `tto`, `date_from`, `date_to`, `route_id`, `price`, `created_at`, `updated_at`) VALUES
-(1, 'Сыктывкар', 'Корткерос', NULL, NULL, 9, 100, '2023-02-12 21:00:00', '2023-02-12 21:00:00'),
-(2, 'Сыктывкар', 'Сторожевск', NULL, NULL, 9, 200, '2023-02-12 21:00:00', '2023-02-12 21:00:00'),
-(3, 'Сыктывкар', 'Усть-Кулом', NULL, NULL, 9, 450, '2023-02-14 06:44:14', '2023-02-14 06:44:14'),
-(4, 'Сыктывкар', 'Ухта', NULL, NULL, 1, 1000, '2023-02-14 09:13:03', '2023-02-14 09:13:03'),
-(5, 'Сыктывкар', 'Сторожевск', NULL, NULL, 1, 200, '2023-02-14 09:13:03', '2023-02-14 09:13:03'),
-(6, 'Сыктывкар', 'Усть-Кулом', NULL, NULL, 1, 400, '2023-02-14 09:36:40', '2023-02-14 09:36:40');
+INSERT INTO `ways` (`id`, `fromm`, `tto`, `time_from`, `time_to`, `route_id`, `price`, `created_at`, `updated_at`) VALUES
+(1, 'Сыктывкар', 'Корткерос', '00:00:00', '00:40:00', 9, 100, '2023-02-12 21:00:00', '2023-02-12 21:00:00'),
+(2, 'Сыктывкар', 'Сторожевск', '00:00:00', '01:45:00', 9, 200, '2023-02-12 21:00:00', '2023-02-12 21:00:00'),
+(4, 'Сыктывкар', 'Ухта', '00:00:00', '06:35:00', 1, 1000, '2023-02-14 09:13:03', '2023-02-14 09:13:03'),
+(5, 'Сыктывкар', 'Сторожевск', '00:00:00', '01:35:00', 1, 200, '2023-02-14 09:13:03', '2023-02-14 09:13:03'),
+(6, 'Сыктывкар', 'Усть-Кулом', '00:00:00', '03:00:00', 1, 400, '2023-02-14 09:36:40', '2023-02-14 09:36:40'),
+(7, 'Сыктывкар', 'Усть-Кулом', '00:00:00', '03:30:00', 9, 400, '2023-02-25 11:52:40', '2023-02-25 11:52:40'),
+(8, 'Сторожевск', 'Усть-Кулом', '01:35:00', '03:00:00', 1, 200, '2023-03-02 10:48:50', '2023-03-02 10:48:50'),
+(9, 'Сторожевск', 'Ухта', '01:35:00', '06:35:00', 1, 800, '2023-03-02 10:48:50', '2023-03-02 10:48:50'),
+(10, 'Усть-Кулом', 'Ухта', '03:00:00', '06:35:00', 1, 600, '2023-03-02 10:49:53', '2023-03-02 10:49:53'),
+(11, 'Сыктывкар', 'Аджером', '00:00:00', '01:00:00', 9, 150, '2023-03-02 12:06:59', '2023-03-02 12:06:59'),
+(12, 'Сторожевск', 'Усть-Кулом', '01:45:00', '03:30:00', 9, 200, '2023-03-02 12:06:59', '2023-03-02 12:06:59');
 
 --
 -- Индексы сохранённых таблиц
@@ -352,12 +378,19 @@ ALTER TABLE `stations`
   ADD KEY `route_id` (`route_id`);
 
 --
+-- Индексы таблицы `tests`
+--
+ALTER TABLE `tests`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `tickets`
 --
 ALTER TABLE `tickets`
   ADD PRIMARY KEY (`id`),
   ADD KEY `id_trip` (`trip_id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `way_id` (`way_id`);
 
 --
 -- Индексы таблицы `trips`
@@ -427,19 +460,25 @@ ALTER TABLE `routes`
 -- AUTO_INCREMENT для таблицы `stations`
 --
 ALTER TABLE `stations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT для таблицы `tests`
+--
+ALTER TABLE `tests`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT для таблицы `trips`
 --
 ALTER TABLE `trips`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT для таблицы `users`
@@ -451,7 +490,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `ways`
 --
 ALTER TABLE `ways`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -468,7 +507,8 @@ ALTER TABLE `stations`
 --
 ALTER TABLE `tickets`
   ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`trip_id`) REFERENCES `trips` (`id`),
-  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`way_id`) REFERENCES `ways` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `trips`
