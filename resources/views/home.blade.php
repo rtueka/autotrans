@@ -73,7 +73,7 @@
             <div class="card" style="width: 18rem;">
                 <form action="{{ route('search') }}">
                     <input type="text" name="fromm" style="display: none;" value="Москва">
-                    <input type="text" name="tto" style="display: none;" value="Санкт-Петербург">
+                    <input type="text" name="tto" style="display: none;" value="Екатеринбург">
                     <button class="button_null">
                     <img src="/images/ekaterinburg.jpg" class="card-img-top" alt="...">
                     <div class="card-body">
