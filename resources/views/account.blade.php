@@ -6,6 +6,7 @@
                 <a class="btn btn-primary" href="{{ route('toPanel') }}">Админ-панель</a> <br>
 
             @endif
+            <a href="{{ route('logout') }}">Выйти из аккаунта</a><br>
             Телефон: {{Auth::user()->phone}} <br>
             Электронная почта: {{Auth::user()->email}}
             <h3 class="mb-3 mt-3">Мои билеты</h3>
@@ -81,8 +82,8 @@
 
             @endforeach
 
-            <a href="{{ route('logout') }}">Выйти из аккаунта</a>
-            <a href="{{ route('ticketExport') }}">TicketExport</a>
+
+{{--            <a href="{{ route('ticketExport') }}">TicketExport</a>--}}
         </div>
     </div>
 @endsection

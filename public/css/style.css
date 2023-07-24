@@ -148,7 +148,8 @@
 
 .form__box{
     background: #aedbfb;
-    padding: 20px;
+    padding: 20px 20px 10px 20px;
+    border-radius: 4px;
 }
 
 .content{

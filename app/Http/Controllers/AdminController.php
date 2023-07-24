@@ -62,6 +62,19 @@ class AdminController extends Controller
         ]);
     }
 
+    public function do_add_driver(Request $req){
+        $driver = new Driver();
+        $driver->name = $req->name;
+        $driver->surname = $req->surname;
+        $driver->patronymic = $req->patronymic;
+        $driver->birthday = $req->birthday;
+        $driver->license_date = $req->license_date;
+        $driver->license_number = $req->license_number;
+        $driver->save();
+
+        return redirect()->route('add_driver');
+    }
+
     public function adminTripSearch(Request $request){
 
         if ($request->id){
@@ -98,7 +111,7 @@ class AdminController extends Controller
         $tickets = Ticket::where('trip_id', "{$id}")->get();
         $trip = Trip::find($id);
         $pdf = Pdf::loadView('admin.list', ['tickets' => $tickets, 'trip' => $trip]);
-        return $pdf->stream('ticket.pdf');
+        return $pdf->stream('list.pdf');
     }
 
 

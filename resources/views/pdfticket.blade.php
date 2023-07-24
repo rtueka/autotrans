@@ -58,7 +58,7 @@
     </div>
     <form action="{{ route('pdf') }}">
         <input type="text" name="ticket_id" value="{{$ticket->id}}" hidden>
-        <button type="submit" class="btn btn-dark">Скачать билет</button>
+{{--        <button type="submit" class="btn btn-dark">Скачать билет</button>--}}
     </form>
 
 
