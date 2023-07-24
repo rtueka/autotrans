@@ -36,6 +36,7 @@ Route::get('/login', function () {
 })->name('login');
 
 Route::get('/account', 'App\Http\Controllers\MainController@account')->name('account');
+
 Route::post('/delete_ticket', 'App\Http\Controllers\MainController@deleteTicket')->name('deleteTicket');
 
 Route::get('/', function () {
@@ -54,6 +55,8 @@ Route::get('/trips', 'App\Http\Controllers\AdminController@admintrips')->name('a
 Route::get('/add_trip', 'App\Http\Controllers\AdminController@add_trip')->name('add_trip');
 
 Route::post('/do_add_trip', 'App\Http\Controllers\AdminController@do_add_trip')->name('do_add_trip');
+
+Route::post('/do_add_driver', 'App\Http\Controllers\AdminController@do_add_driver')->name('do_add_driver');
 
 Route::get('/drivers', 'App\Http\Controllers\AdminController@drivers')->name('drivers');
 

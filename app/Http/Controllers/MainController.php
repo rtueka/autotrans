@@ -46,8 +46,6 @@ class MainController extends Controller
         $ticket->way_id = $req->input('way_id');
         $ticket->save();
 
-//        QrCode::generate("Lorem ipsum!", "/images/qrcodes/{$ticket->id}.svg");
-
         return redirect()->route('home');
     }
 
